@@ -3,15 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './Entity/user.entity'; // adjust the path and entity name
-import { UserController } from './User/user.controller';
-import { UserService } from './User/user.service';
-import { Customer } from './Entity/customer.entity';
-import { CustomerController } from './customer/customer.controller';
-import { CustomerService } from './customer/customer.service';
+
 // import * as dotenv from 'dotenv';
 // dotenv.config(); // Load environment variables from .env file
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './UserLogin/AuthModule.module';
+import {  AuthModule} from './UserLogin/auth.module';
+import { UserModule } from './UserRegister/user.module';
+import { RoleModule } from './RolePermission/rolepermission.module';
+import { PermissionModule } from './Permission/permission.module';
+import { CreateRoleModule } from './Role/createrole.module';
+import { managemodule } from './ManageModule/managamodeule.module';
 
 
 @Module({
@@ -30,12 +31,12 @@ import { AuthModule } from './UserLogin/AuthModule.module';
       // this is key             
       synchronize: true,      // auto-create tables (disable in prod!)
     }),
-    TypeOrmModule.forFeature([User,Customer]), // add your entity classes here, 
-    AuthModule
-    
+    TypeOrmModule.forFeature([User]), // add your entity classes here, 
+    AuthModule,UserModule,RoleModule,PermissionModule,CreateRoleModule,managemodule
+
   ],
   
-  controllers: [AppController,UserController,CustomerController],
-  providers: [AppService,UserService,CustomerService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

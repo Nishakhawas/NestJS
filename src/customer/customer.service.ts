@@ -26,11 +26,13 @@ async findOne(id: number): Promise<Customer | null> {
   return customer;
 }
 
-async delete(id: number): Promise<void> {
+async delete(id: number): Promise<{message:string}> {
   const result = await this.customerRepo.delete(id);
-  if (result.affected === 0) {
+  if (!result) {
     throw new Error(`Customer with ID ${id} not found`);
-  } 
+  } else{
+    return { message: `Customer with ID ${id} deleted successfully.` };
+  }
 }
 
 async update(id: number, updateCustomerDto: CreateCustomerDto): Promise<Customer> {

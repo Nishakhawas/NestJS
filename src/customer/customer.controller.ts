@@ -26,6 +26,7 @@ async findOne(@Param('id',ParseIntPipe) id: number): Promise<Customer> {
 
   return customer;
 }
+
 @Delete(':id')
 async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
   const customer = await this.customerService.findOne(id);
@@ -35,6 +36,7 @@ async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
   await this.customerService.delete(id);
   return;
 }
+
 @Put(':id')
 async update( 
   @Param('id', ParseIntPipe) id: number,

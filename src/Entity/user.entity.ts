@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne } from 'typeorm';
+import { Role } from './role.entity';
+import { Permission } from './permission.entity';
 
 @Entity()
 @Unique('user_name', ['name'])
@@ -12,5 +14,8 @@ export class User {
   email!: string;
   @Column()
   password!: string;
+  @ManyToOne(() => Role, role =>role.users ,{ eager: true })
+  role: Role;
+  permissions:Permission;
 }
 
