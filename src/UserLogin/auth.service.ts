@@ -13,7 +13,7 @@ export class AuthService {
      @InjectRepository(User)
     private userRepo: Repository<User>,
        @InjectRepository(Role)
-    private roleRepo: Repository<Role>,
+    private groupRepo: Repository<Role>,
     private jwtService: JwtService,
   ) {}
 
@@ -34,7 +34,7 @@ export class AuthService {
     subject: user.id,
     email: user.email,
     role: user.role.name,
-    permissions: user.role.permissions.map((p) => p.name), 
+    permissions: user.role.users.map((p) => p.name), 
   };
 
   const token = this.jwtService.sign(payload);
@@ -46,7 +46,7 @@ export class AuthService {
       id: user.id,
       email: user.email,
       role: user.role.name,
-      permissions: user.role.permissions.map((p) => p.name),
+      permissions: user.role.users.map((p) => p.name),
     },
   };
 }

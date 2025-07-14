@@ -9,14 +9,16 @@ import { User } from './Entity/user.entity'; // adjust the path and entity name
 import { ConfigModule } from '@nestjs/config';
 import {  AuthModule} from './UserLogin/auth.module';
 import { UserModule } from './UserRegister/user.module';
-import { RoleModule } from './RolePermission/rolepermission.module';
+// import { RoleModule } from './RolePermission/rolepermission.module';
 import { PermissionModule } from './Permission/permission.module';
 import { CreateRoleModule } from './Role/createrole.module';
 import { managemodule } from './ManageModule/managamodeule.module';
+import {group} from './Group/group.module';
+import { CreateUserController } from './CreateUser/createuser.module';
+import { GroupPermissionModule } from './GroupPermission/grouppermission.module';
 
 
-@Module({
-  
+@Module({ 
   imports:[
     ConfigModule.forRoot({ isGlobal: true }),
      TypeOrmModule.forRoot({
@@ -32,7 +34,8 @@ import { managemodule } from './ManageModule/managamodeule.module';
       synchronize: true,      // auto-create tables (disable in prod!)
     }),
     TypeOrmModule.forFeature([User]), // add your entity classes here, 
-    AuthModule,UserModule,RoleModule,PermissionModule,CreateRoleModule,managemodule
+    AuthModule,UserModule,PermissionModule,CreateRoleModule,managemodule,group,CreateUserController,
+    GroupPermissionModule
 
   ],
   

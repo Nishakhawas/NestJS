@@ -1,10 +1,7 @@
-import { Controller,Get, Post, Body, UseGuards, SetMetadata, Delete, Param, ParseIntPipe, NotFoundException } from '@nestjs/common';
+import { Controller,Get, Post, Body, Delete, Param, ParseIntPipe, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';  // ← THIS LINE
 import { UserService } from './user.service';
 import { User } from '../Entity/user.entity'; // adjust the path to your entity
-import { PermissionGuard } from 'src/common/guards/permission.guard';
-import { CheckPermission } from 'src/common/decorators/permision.decorator';
-import { JwtAuthGuard } from 'src/UserLogin/jwt-auth.guard';
 
 @Controller('register')
 export class UserController {

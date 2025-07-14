@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Role } from "./role.entity";
+import { Group } from "./group.entity";
 
 @Entity()
 export class Permission {
@@ -21,7 +21,15 @@ export class Permission {
   @Column()
   delete_access:boolean;
 
- @ManyToMany(() => Role, role => role.permissions)
-  roles: Role[]; 
+  @ManyToMany(() => Group, group => group.permissions)
+  groups: Group[]; 
+
+ 
 
 }
+
+
+//  @ManyToMany(() => Role, role => role.permissions)
+//   roles: Role[]; 
+ // @ManyToMany(() => CreateUser, (user) => user.permissions)
+  // users: CreateUser[]; 

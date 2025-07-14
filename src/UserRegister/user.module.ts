@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { Role } from 'src/Entity/role.entity';
-import { RoleService } from 'src/RolePermission/rolepermission.service';
+// import { RoleService } from 'src/RolePermission/rolepermission.service';
 import { Permission } from 'src/Entity/permission.entity';
 
 @Module({
@@ -14,7 +14,7 @@ import { Permission } from 'src/Entity/permission.entity';
     TypeOrmModule.forFeature([User,Role,Permission]),  // <-- THIS LINE IS CRUCIAL    
   ],
   controllers: [UserController], // Add your controllers here if needed
-  providers: [UserService,RoleService], // Add your services here
+  providers: [UserService], // Add your services here
   exports: [UserService], 
 })
 export class UserModule {}

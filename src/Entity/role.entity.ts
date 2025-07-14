@@ -7,13 +7,12 @@ import { User } from "./user.entity";
 export class Role {
   @PrimaryGeneratedColumn()
   id: number;
-
   @Column()
-  name: string; // e.g. 'admin', 'editor'
+  name: string; 
 
-  @ManyToMany(() => Permission, permission=>permission.roles)
-  @JoinTable()
-  permissions: Permission[];
+  // @ManyToMany(() => Permission, permission=>permission.roles)
+  // @JoinTable()
+  // permissions: Permission;
 
   @OneToMany(() => User, user => user.role)
   users: User[]; //THIS is what role.users refers to!

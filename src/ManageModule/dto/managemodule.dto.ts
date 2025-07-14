@@ -1,22 +1,22 @@
-import { IsOptional, IsString, IsBoolean, IsArray } from 'class-validator';
+import { IsOptional, IsString, IsBoolean } from 'class-validator';
 
 export class CreateManageModuleDto {
  
   @IsString()
-  parentMenu?: string;
+  parentMenu!: string;
 
   @IsString()
-  menu: string;
+  menu!: string;
 
   @IsString()
-  displayText1: string;
+  displayText1!: string;
 
   @IsOptional()
   @IsString()
-  displayText2?: string;
+  displayText2!: string;
 
   @IsString()
-  menuLink: string;
+  menuLink!: string;
 
   @IsOptional()
   @IsString()

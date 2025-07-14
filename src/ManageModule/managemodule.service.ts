@@ -41,7 +41,7 @@ async update(id: number, updateModuleDto: CreateManageModuleDto): Promise<Manage
     const result = await this.moduleRepo.delete(id);
     if (!result) throw new NotFoundException('Module not found');
   }
-// module.service.ts
+
 
 async find(search?: string): Promise<ManageModule[]> {
   const query = this.moduleRepo.createQueryBuilder('module');
@@ -53,6 +53,32 @@ async find(search?: string): Promise<ManageModule[]> {
   }
 
   return query.getMany();
+}
+
+async finds(filters: { parentMenu?: string; menu?: string ,displaytext1?:string, displaytext2?:string, menulink?:string}) {
+  const query = this.moduleRepo.createQueryBuilder('user');
+
+  if (filters.parentMenu) {
+    query.andWhere('user.parentmenu LIKE :parentmenu', { parentmenu: `%${filters.parentMenu}%` });
+  }
+
+  if (filters.menu) {
+    query.andWhere('user.menu LIKE :menu', { menu: `%${filters.menu}%` });
+  }
+
+   if (filters.displaytext1) {
+    query.andWhere('user.displaytext1 LIKE :displaytext1', { displaytext1: `%${filters.displaytext1}%` });
+  }
+
+  if (filters.displaytext2) {
+    query.andWhere('user.displaytext2 LIKE :displaytext1', { displaytext1: `%${filters.displaytext2}%` });
+  }
+
+  if (filters.menulink) {
+    query.andWhere('user.menulink LIKE :menulink', { menulink: `%${filters.menulink}%` });
+  }
+
+  return await query.getMany();
 }
 
 

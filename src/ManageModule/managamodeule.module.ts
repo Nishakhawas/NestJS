@@ -5,7 +5,7 @@ import { ManageModuleController } from './managemodule.controller';
 import { ManageModule } from '../Entity/managemodule.entity';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ManageModule]),  // <-- THIS LINE IS CRUCIAL    
+    TypeOrmModule.forFeature([ManageModule]),   
   ],
   controllers: [ManageModuleController], 
   providers: [ManageModuleService], 

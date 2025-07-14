@@ -29,7 +29,7 @@ export class ManageModule {
   @Column({ nullable: true })
   remarks: string;
 
-  @Column({ default: true })
+  @Column({ default:false })
   isActive: boolean;
  
   // @Column() // Stores array like: "Insert,View,Update"

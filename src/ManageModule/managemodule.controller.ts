@@ -17,7 +17,12 @@ export class ManageModuleController {
     return this.moduleService.findAll();
   }
   
-  @Get('search')
+@Get('query')
+finds(@Query('parentMenu') parentMenu: string, @Query('menu') menu: string ,@Query('displayText1') displaytext1: string , @Query('displayText2') displaytext2: string , @Query('menuLink') menulink: string) {
+  return this.moduleService.finds({ parentMenu, menu ,displaytext1, displaytext2,menulink});
+}
+
+@Get('search')
 async find(@Query('search') search: string) {
   return this.moduleService.find(search);
 }
@@ -38,16 +43,5 @@ async find(@Query('search') search: string) {
   }
 
   
-
-
-
-// @Get('search')
-// async searchModules(@Query('search') search: string) {
-//   if (!search || search.trim() === '') {
-//     return this.moduleService.findAll(); // return full list
-//   }
-//   return this.moduleService.find(search);
-// }
-
 
 }

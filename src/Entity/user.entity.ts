@@ -3,8 +3,8 @@ import { Role } from './role.entity';
 import { Permission } from './permission.entity';
 
 @Entity()
-@Unique('user_name', ['name'])
-@Unique('user_email', ['email'])
+// @Unique('user_name', ['name'])
+// @Unique('user_email', ['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;

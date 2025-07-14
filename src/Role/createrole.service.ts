@@ -2,7 +2,7 @@ import { ConflictException, Injectable, InternalServerErrorException } from "@ne
 import { InjectRepository } from "@nestjs/typeorm";
 import { Role } from "src/Entity/role.entity";
 import { Repository } from "typeorm";
-import { CreateRole } from "./createrole.dto";
+import { CreateRoleDto } from "./createrole.dto";
 
 @Injectable()
 export class CreateRoleService {
@@ -11,7 +11,7 @@ export class CreateRoleService {
     private roleRepo: Repository<Role>,  
   ) {}
 
-  async create(createRoleDto: CreateRole): Promise<Role> {   
+  async create(createRoleDto: CreateRoleDto): Promise<Role> {   
     try{
         const Role = this.roleRepo.create(createRoleDto);
      return await this.roleRepo.save(Role);
