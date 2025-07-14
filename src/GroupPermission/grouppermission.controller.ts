@@ -24,15 +24,15 @@ findOne(@Param('id') id: number) {
   return this.groupService.findOne(+id);
 }
 
-// @Put(':id/permissions')
-// async updateGroupPermissions(
-//   @Param('id', ParseIntPipe) id: number,
-//   @Body() dto: CreateGroupPermissionDto
-// ) {
-//   return this.groupService.updateGroupPermissions(id, dto.permissions);
-// }
+@Put(':id/permissions')
+async updateGroupPermissions(
+  @Param('id', ParseIntPipe) id: number,
+  @Body() dto: CreateGroupPermissionDto
+) {
+  return this.groupService.updateGroupPermissions(id, dto.permissions);
+}
 
-@Patch(':groupId/permissions/:permissionId')
+@Put(':groupId/permissions/:permissionId')
 async updateSingleAccess(
   @Param('groupId', ParseIntPipe) groupId: number,
   @Param('permissionId', ParseIntPipe) permissionId: number,
@@ -43,3 +43,22 @@ async updateSingleAccess(
 
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

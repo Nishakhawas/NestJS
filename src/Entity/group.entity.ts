@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { CreateUser } from './createuser.entity';
 import { Permission } from './permission.entity';
+import { GroupPermission } from './grouppermission.entity';
 
 @Entity()
 export class Group {
@@ -29,4 +30,8 @@ export class Group {
   @ManyToMany(() => Permission, permission=>permission.groups)
   @JoinTable()
   permissions: Permission[];
+
+  @OneToMany(() => GroupPermission, gp => gp.group)
+groupPermissions: GroupPermission[];
+
 }

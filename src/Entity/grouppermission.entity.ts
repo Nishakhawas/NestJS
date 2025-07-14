@@ -7,10 +7,10 @@ export class GroupPermission {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Group, group => group.permissions, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Group, group => group.groupPermissions)
   group: Group;
 
-  @ManyToOne(() => Permission, permission => permission.groups, { eager: true })
+  @ManyToOne(() => Permission, permission => permission.groupPermissions, { eager: true })
   permission: Permission;
 
   @Column({ default: false })
