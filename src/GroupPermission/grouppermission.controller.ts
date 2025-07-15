@@ -32,14 +32,14 @@ async updateGroupPermissions(
   return this.groupService.updateGroupPermissions(id, dto.permissions);
 }
 
-@Put(':groupId/permissions/:permissionId')
-async updateSingleAccess(
-  @Param('groupId', ParseIntPipe) groupId: number,
-  @Param('permissionId', ParseIntPipe) permissionId: number,
-  @Body() dto: PermissionAccessDto
-) {
-  return this.groupService.updateGroupPermissionAccess(groupId, permissionId, dto);
-}
+// @Put(':groupId/permissions/:permissionId')
+// async updateSingleAccess(
+//   @Param('groupId', ParseIntPipe) groupId: number,
+//   @Param('permissionId', ParseIntPipe) permissionId: number,
+//   @Body() dto: PermissionAccessDto
+// ) {
+//   return this.groupService.updateGroupPermissionAccess(groupId, permissionId, dto);
+// }
 
     
 }

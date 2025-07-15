@@ -25,8 +25,8 @@ export class Permission {
   @ManyToMany(() => Group, group => group.permissions)
   groups: Group[]; 
 
-  @OneToMany(() => GroupPermission, gp => gp.permission)
-groupPermissions: GroupPermission[];
+// @OneToMany(() => GroupPermission, gp => gp.permission)
+// groupPermissions: GroupPermission[];
 
  
 

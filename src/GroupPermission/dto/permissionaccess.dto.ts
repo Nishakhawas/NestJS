@@ -1,6 +1,10 @@
-import { IsBoolean } from "class-validator";
+import { IsBoolean, IsNumber } from "class-validator";
 
 export class PermissionAccessDto {
+
+   @IsNumber()
+  permissionId: number;
+
   @IsBoolean()
   create_access: boolean;
 
@@ -13,3 +17,4 @@ export class PermissionAccessDto {
   @IsBoolean()
   delete_access: boolean;
 }
+

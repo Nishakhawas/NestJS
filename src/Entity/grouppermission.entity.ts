@@ -7,11 +7,11 @@ export class GroupPermission {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Group, group => group.groupPermissions)
-  group: Group;
+  // @ManyToOne(() => Group, group => group.groupPermissions)
+  // group: Group;
 
-  @ManyToOne(() => Permission, permission => permission.groupPermissions, { eager: true })
-  permission: Permission;
+  // @ManyToOne(() => Permission, permission => permission.groupPermissions, { eager: true })
+  // permission: Permission;
 
   @Column({ default: false })
   create_access: boolean;

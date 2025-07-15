@@ -31,7 +31,7 @@ export class Group {
   @JoinTable()
   permissions: Permission[];
 
-  @OneToMany(() => GroupPermission, gp => gp.group)
-groupPermissions: GroupPermission[];
+//   @OneToMany(() => GroupPermission, gp => gp.group)
+// groupPermissions: GroupPermission[];
 
 }

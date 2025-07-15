@@ -2,6 +2,7 @@ import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, Pu
 import { CreatePermissionDto } from "./permission-dto";
 import { PermissionService } from "./permission.service";
 import { Permission } from "src/Entity/permission.entity";
+import { PermissionAccessDto } from "src/GroupPermission/dto/permissionaccess.dto";
 
 @Controller('permissions')
 export class PermissionController {
@@ -31,7 +32,7 @@ async findOne(@Param('id',ParseIntPipe) id: number): Promise<Permission> {
   @Put(':id')
   async update( 
     @Param('id', ParseIntPipe) id: number,
-    @Body() updatePermissionDto: CreatePermissionDto,
+    @Body() updatePermissionDto: PermissionAccessDto,
   ): Promise<Permission> {
     const permission = await this.permissionService.findOne(id);
     if (!permission) {
@@ -39,7 +40,14 @@ async findOne(@Param('id',ParseIntPipe) id: number): Promise<Permission> {
     }
     return this.permissionService.update(id, updatePermissionDto);
   }
-  
+
+//   @Put(':id')
+// async updateMany(
+//   @Body() updatePermissionsDto: PermissionAccessDto[],
+// ): Promise<Permission[]> {
+//   return this.permissionService.updateMany(updatePermissionsDto);
+// }
+
 
 
 }

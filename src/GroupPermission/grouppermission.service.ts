@@ -93,32 +93,61 @@ async updateGroupPermissions(groupId: number, permissionIds: number[]): Promise<
 }
 
 
-async updateGroupPermissionAccess(
-  groupId: number,
-  permissionId: number,
-  accessDto: PermissionAccessDto,
-): Promise<GroupPermission> {
-  console.log('GroupPermission not found:', groupId, permissionId);
+// async updateGroupPermissionAccess(
+//   groupId: number,
+//   permissionId: number,
+//   accessDto: PermissionAccessDto,
+// ): Promise<GroupPermission> {
+//   console.log('GroupPermission not found:', groupId, permissionId);
 
-  const groupPermission = await this.groupPermissionRepo.findOne({
-    where: {
-      group: { id: groupId },
-      permission: { id: permissionId },
-    },
-    relations: ['group', 'permission'],
-  });
+//   const groupPermission = await this.groupPermissionRepo.findOne({
+//     where: {
+//       group: { id: groupId },
+//       permission: { id: permissionId },
+//     },
+//     relations: ['group', 'permission'],
+//   });
 
-  if (!groupPermission) {
-    throw new NotFoundException(`Permission ${permissionId} not found for Group ${groupId}`);
-  }
+//   if (!groupPermission) {
+//     throw new NotFoundException(`Permission ${permissionId} not found for Group ${groupId}`);
+//   }
 
-  groupPermission.create_access = accessDto.create_access;
-  groupPermission.read_access = accessDto.read_access;
-  groupPermission.update_access = accessDto.update_access;
-  groupPermission.delete_access = accessDto.delete_access;
+//   groupPermission.create_access = accessDto.create_access;
+//   groupPermission.read_access = accessDto.read_access;
+//   groupPermission.update_access = accessDto.update_access;
+//   groupPermission.delete_access = accessDto.delete_access;
 
-  return await this.groupRepo.save(groupPermission);
-}
+//   return await this.groupPermissionRepo.save(groupPermission);
+// }
+
+// async updateGroupPermissionAccess(
+//   groupId: number,
+//   permissionId: number,
+//   accessDto: PermissionAccessDto,
+// ): Promise<GroupPermission> {
+//   console.log('Updating GroupPermission:', groupId, permissionId);
+
+//   const groupPermission = await this.groupPermissionRepo.findOne({
+//     where: {
+//       group: { id: groupId },
+//       permission: { id: permissionId },
+//     },
+//     relations: ['group', 'permission'],
+//   });
+
+//   if (!groupPermission) {
+//     throw new NotFoundException(`Permission ${permissionId} not found for Group ${groupId}`);
+//   }
+
+//   groupPermission.create_access = accessDto.create_access;
+//   groupPermission.read_access = accessDto.read_access;
+//   groupPermission.update_access = accessDto.update_access;
+//   groupPermission.delete_access = accessDto.delete_access;
+
+//   // ✅ Use the correct repo
+//   return await this.groupPermissionRepo.save(groupPermission);
+// }
+
 
 
 
