@@ -16,6 +16,7 @@ import { managemodule } from './ManageModule/managamodeule.module';
 import {group} from './Group/group.module';
 import { CreateUserController } from './CreateUser/createuser.module';
 import { GroupPermissionModule } from './GroupPermission/grouppermission.module';
+import { EmailConfigModule } from './Email/emailconfig.module';
 
 
 @Module({ 
@@ -35,7 +36,7 @@ import { GroupPermissionModule } from './GroupPermission/grouppermission.module'
     }),
     TypeOrmModule.forFeature([User]), // add your entity classes here, 
     AuthModule,UserModule,PermissionModule,CreateRoleModule,managemodule,group,CreateUserController,
-    GroupPermissionModule
+    GroupPermissionModule,EmailConfigModule
 
   ],
   
