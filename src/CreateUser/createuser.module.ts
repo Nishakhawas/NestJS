@@ -13,4 +13,4 @@ import { Group } from 'src/Entity/group.entity';
   providers: [createUserService], 
   exports: [createUserService], 
 })
-export class CreateUserController {}
+export class CreateUserModule {}

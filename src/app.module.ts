@@ -14,9 +14,10 @@ import { PermissionModule } from './Permission/permission.module';
 import { CreateRoleModule } from './Role/createrole.module';
 import { managemodule } from './ManageModule/managamodeule.module';
 import {group} from './Group/group.module';
-import { CreateUserController } from './CreateUser/createuser.module';
+import { CreateUserModule } from './CreateUser/createuser.module';
 import { GroupPermissionModule } from './GroupPermission/grouppermission.module';
 import { EmailConfigModule } from './Email/emailconfig.module';
+import { bannerModule } from './Banner/banner.module';
 
 
 @Module({ 
@@ -35,8 +36,8 @@ import { EmailConfigModule } from './Email/emailconfig.module';
       synchronize: true,      // auto-create tables (disable in prod!)
     }),
     TypeOrmModule.forFeature([User]), // add your entity classes here, 
-    AuthModule,UserModule,PermissionModule,CreateRoleModule,managemodule,group,CreateUserController,
-    GroupPermissionModule,EmailConfigModule
+    AuthModule,UserModule,PermissionModule,CreateRoleModule,managemodule,group,CreateUserModule,
+    GroupPermissionModule,EmailConfigModule,bannerModule
 
   ],
   
