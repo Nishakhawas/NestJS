@@ -27,7 +27,7 @@ export class EmailConfig {
   protocol!: string; 
 
   @Column()
-  Encryption!: string; 
+  encryption!: string; 
 
   @Column({default: false })
   isActive!: boolean;

@@ -2,7 +2,7 @@ import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class EmailConfigDto {
 @IsString({ message: 'Name must be a string' })
-mailFrom!: string;
+  mailFrom!: string;
   @IsString({ message: 'Name must be a string' })
   mailAddress!: string;
   @IsString()
@@ -17,7 +17,7 @@ mailFrom!: string;
   protocol!: string;
 
   @IsString({ message: 'Name must be a string' })
-  Encryption!: string;
+  encryption!: string;
 
   @IsOptional()
   @IsBoolean()
