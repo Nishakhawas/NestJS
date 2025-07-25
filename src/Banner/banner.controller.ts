@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { BannerService } from './banner.service';
 import { Banner } from './banner.entity';
@@ -28,6 +29,30 @@ export class BannerController {
     return await this.bannerService.getAllBanners();
   }
 
+  @Get('search')
+async find(@Query('search') search: string) {
+  return this.bannerService.find(search);
+}
+
+  // @Get('columnquery')
+  // finds(@Query('bannerHeading') bannerHeading: string, @Query('startDate') startDate:Date ,@Query('endDate') endDate: Date ) {
+  //   return this.bannerService.finds({ bannerHeading, startDate ,endDate});
+  // }
+
+  @Get('columnquery')
+finds(
+  @Query('bannerHeading') bannerHeading: string,
+  @Query('startDate') startDate: string,
+  @Query('endDate') endDate: string,
+) {
+  return this.bannerService.finds({
+    bannerHeading,
+    startDate: startDate ? new Date(startDate) : undefined,
+    endDate: endDate ? new Date(endDate) : undefined,
+  });
+}
+
+  
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Banner> {
     return await this.bannerService.getBannerById(id);

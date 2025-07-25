@@ -41,7 +41,9 @@ export class BannerService {
     const filePath = path.join(uploadDir, filename);
     fs.writeFileSync(filePath, buffer);
 
-    imageTag = `<img src="https://ccsnepal.com/uploads/${filename}" height="30px" width="30px">`;
+    
+    imageTag = filename; 
+
   }
 
   const newBanner = this.bannerRepo.create({
@@ -81,4 +83,41 @@ async updateBanner(id: number, updateBannerrDto: CreateBannerDto): Promise<Banne
       throw new NotFoundException(`Banner with ID ${id} not found`);
     }
   }
+
+  async find(search?: string): Promise<Banner[]> {
+    const query = this.bannerRepo.createQueryBuilder('module');
+    if (search) {
+      query.where(
+        'module.bannerHeading LIKE :search OR module.startDate LIKE :search OR module.endDate LIKE :search',
+        { search: `%${search}%` },
+      );
+    }
+  
+    return query.getMany();
+  }
+
+  async finds(filters: {bannerHeading?: string; startDate?: Date,endDate?:Date}) {
+  console.log("🚀 ~ BannerService ~ finds ~ filters:", filters)
+  const query = this.bannerRepo.createQueryBuilder('banner');
+
+  if (filters.bannerHeading) {
+    query.andWhere('banner.bannerHeading LIKE :bannerHeading', { bannerHeading: `%${filters.bannerHeading}%` });
+  }
+
+   if (filters.startDate) {
+    query.andWhere('banner.startDate >= :startDate', {
+      startDate: filters.startDate,
+    });
+  }
+  
+
+  if (filters.endDate) {
+    query.andWhere('banner.endDate <= :endDate', {
+      endDate: filters.endDate,
+    });
+  }
+ 
+  return await query.getMany();
+}
+
 }
