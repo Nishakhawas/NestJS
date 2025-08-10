@@ -9,9 +9,6 @@ export class LoginActivity {
   loginuserid: number;
 
   @Column()
-  loginusername: string;
-
-  @Column()
   loginuseremail: string;
 
   @Column()

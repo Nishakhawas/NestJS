@@ -4,10 +4,10 @@ import * as moment from 'moment';
 import { Nepequengdate } from '../Date/nepequengdate.entity';
 
 interface LogPayload {
- tablename: string;
-  primarykey: string;
-  primaryid: string | number; // ok here, we’ll convert it later
-  action: 'Insert' | 'Update' | 'Delete';
+ tablename?: string;
+  primarykey?: string;
+  primaryid?: string | number; // ok here, we’ll convert it later
+  action?: 'Insert' | 'Update' | 'Delete';
   dataold?: any; 
   datanew?: any;
   postip?: string;

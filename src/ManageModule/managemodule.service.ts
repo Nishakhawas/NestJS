@@ -127,27 +127,6 @@ const originalData = JSON.parse(JSON.stringify(module));
   return updatedModule;
 }
 
-  // async remove(id: number,req:CustomRequest): Promise<void> {
-  //   const result = await this.moduleRepo.delete(id);
-  //   if (!result) throw new NotFoundException('Module not found');
-  //   //COpy the original data before deletion
-  //     const originalData = JSON.parse(JSON.stringify(module));
-
-  // // Delete the record
-  // await this.moduleRepo.delete(id);
-  //   // Log the delete action
-  //   await saveAuditLog(this.auditRepo, {
-  //     tablename: 'manage_module',
-  //     primarykey: 'token',
-  //     primaryid: id,
-  //     action: 'Delete',
-  //     dataold: JSON.stringify(originalData),
-  //     datanew: null,
-  //     postby: req.user.id,
-  //     postip: req.ip,
-  //     locationid: req.user.locationid,
-  //   });
-  // }
 
   async remove(id: number, req: CustomRequest): Promise<void> {
   // Fetch the original module before deleting
