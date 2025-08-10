@@ -12,12 +12,16 @@ import { UserModule } from './UserRegister/user.module';
 // import { RoleModule } from './RolePermission/rolepermission.module';
 import { PermissionModule } from './Permission/permission.module';
 import { CreateRoleModule } from './Role/createrole.module';
-import { managemodule } from './ManageModule/managamodeule.module';
 import {group} from './Group/group.module';
 import { CreateUserModule } from './CreateUser/createuser.module';
 import { GroupPermissionModule } from './GroupPermission/grouppermission.module';
 import { EmailConfigModule } from './Email/emailconfig.module';
 import { bannerModule } from './Banner/banner.module';
+import { PageModule } from './Page/page.module';
+import { TeamModule } from './Team/team.module';
+import { FrontendTilesModule } from './FrontendTiles/frontendtiles.module';
+import { manageModule } from './ManageModule/managamodeule.module';
+import { DateModule } from './Helper Function/Date/date.module';
 
 
 @Module({ 
@@ -36,8 +40,8 @@ import { bannerModule } from './Banner/banner.module';
       synchronize: true,      // auto-create tables (disable in prod!)
     }),
     TypeOrmModule.forFeature([User]), // add your entity classes here, 
-    AuthModule,UserModule,PermissionModule,CreateRoleModule,managemodule,group,CreateUserModule,
-    GroupPermissionModule,EmailConfigModule,bannerModule
+    AuthModule,UserModule,PermissionModule,CreateRoleModule,manageModule,group,CreateUserModule,
+    GroupPermissionModule,EmailConfigModule,bannerModule,PageModule,TeamModule,FrontendTilesModule,DateModule
 
   ],
   

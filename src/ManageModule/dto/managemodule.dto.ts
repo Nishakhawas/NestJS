@@ -1,7 +1,8 @@
-import { IsOptional, IsString, IsBoolean } from 'class-validator';
+import { IsOptional, IsString, IsBoolean, IsNumber } from 'class-validator';
+import { CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export class CreateManageModuleDto {
- 
+
   @IsString()
   parentMenu!: string;
 
@@ -22,9 +23,20 @@ export class CreateManageModuleDto {
   @IsString()
   menuIconClass!: string;
 
-  @IsOptional()
-  @IsString()
-  menuOrder!: string;
+  // @IsOptional()
+  // @IsString()
+  // menuOrder!: string;
+  
+@IsOptional()
+@IsNumber()
+menuOrder?: number;
+
+
+@CreateDateColumn({ name: 'postDateAD', type: 'timestamp' })
+postDateAD: Date;
+
+@UpdateDateColumn()
+updatedAt: Date;
 
   @IsOptional()
   @IsString()
@@ -34,7 +46,4 @@ export class CreateManageModuleDto {
   @IsBoolean()
   isActive!: boolean;
 
-  // @IsArray()
-  // @IsString({ each: true })
-  // operations: string;
 }

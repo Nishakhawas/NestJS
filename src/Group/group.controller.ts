@@ -43,7 +43,7 @@ finds(@Query('groupName') groupName: string, @Query('groupCode') groupCode: stri
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateDto: CreateGroupDto) {
+  update(@Param('id') id: string, @Body() updateDto: CreateGroupDto) {  
     return this.groupService.update(+id, updateDto);
   }
 
@@ -51,7 +51,5 @@ finds(@Query('groupName') groupName: string, @Query('groupCode') groupCode: stri
   remove(@Param('id') id: string) {
     return this.groupService.remove(+id);
   }
-
-  
 
 }

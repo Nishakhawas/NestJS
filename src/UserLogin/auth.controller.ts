@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginUserDto } from "./dto/user-login.dto";
 import { User } from "src/Entity/user.entity";
+import { CreateUser } from "src/Entity/createuser.entity";
 
 @Controller('auth')
 export class AuthController {
@@ -13,7 +14,7 @@ export class AuthController {
   }
 
   @Get()
-    findAll(): Promise<User[]> {
+    findAll(): Promise<CreateUser[]> {
       return this.authService.findAll();
     }
 }

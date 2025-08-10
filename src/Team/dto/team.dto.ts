@@ -1,44 +1,54 @@
-import { IsBoolean, IsDateString, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsString, IsEmail, IsBoolean, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateTeamDto {
   @IsString()
-  @IsNotEmpty()
-  pageMenu!: string;
+  name!: string;
+
+  @IsString()
+  designation: string;
+
+  @IsString()
+  type: string;
+
+  @IsString()
+  address: string;
 
   @IsOptional()
-  @IsString()
-  title!: string;
-
-  @IsString()
-  pageAlise!: string;
+  imageUrl: string;
 
   @IsOptional()
-  @IsString()
-  imageUrl!: string;
-
-  @IsString()
-  shortContent!: string;
+  testimonial: string;
 
   @IsOptional()
-  @IsString()
-  Description!: string;
+  skills: string;
 
   @IsOptional()
+  whatIDo: string;
+
   @IsString()
-  metaTitle!: string;
+  phone!: string;
+
+  @IsEmail()
+  email!: string;
 
   @IsOptional()
-  @IsString()
-  metaKeyword!: string;
+  facebook!: string;
 
-  @IsString()
-  metaDescription!: string;
+  @IsOptional()
+  twitter!: string;
 
-  
+  @IsOptional()
+  linkedin!: string;
 
-  @IsDateString()
-  startDate: Date;
+  @IsOptional()
+  instagram!: string;
 
-  @IsDateString()
-  endDate: Date;
+  @IsOptional()
+  youtube!: string;
+
+  @IsBoolean()
+  isPublish!: boolean;
+
+  @IsNumber()
+  order!: number;
 }

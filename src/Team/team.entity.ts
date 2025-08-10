@@ -6,29 +6,53 @@ export class Team {
   id!: number;
 
   @Column()
-  pageMenu!: string;
+  name!: string;
 
   @Column()
-  title!: string;
-
-   @Column()
-  pageAlise!: string;
+  designation!: string;
 
   @Column()
+  type!: string;
+
+  @Column()
+  address!: string;
+
+  @Column({ nullable: true })
   imageUrl!: string;
-  
-  @Column()
-  shortContent!: string;
+
+  @Column({ type: 'text', nullable: true })
+  testimonial!: string;
+
+  @Column({ type: 'text', nullable: true })
+  skills!: string;
+
+  @Column({ type: 'text', nullable: true })
+  whatIDo!: string;
 
   @Column()
-  Description!: string;
- 
-  @Column()
-  metaTitle!: string;
+  phone!: string;
 
   @Column()
-  metaKeyword!: string;
- 
+  email!: string;
+
+  @Column({ nullable: true })
+  facebook!: string;
+
+  @Column({ nullable: true })
+  twitter!: string;
+
+  @Column({ nullable: true })
+  linkedin!: string;
+
+  @Column({ nullable: true })
+  instagram!: string;
+
+  @Column({ nullable: true })
+  youtube!: string;
+
+  @Column({ default: false })
+  isPublish!: boolean;
+
   @Column()
-  metaDescription!: string;
+  order!: number;
 }

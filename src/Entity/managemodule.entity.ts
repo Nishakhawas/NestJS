@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class ManageModule {
@@ -8,7 +8,7 @@ export class ManageModule {
   @Column({ nullable: true })
   parentMenu: string;
 
-  @Column({ unique: true })
+  @Column({ nullable: true })
   menu: string;
 
   @Column()
@@ -23,8 +23,20 @@ export class ManageModule {
   @Column({ nullable: true })
   menuIconClass: string;
 
+  // @Column({ nullable: true })
+  // menuOrder: string;
+
   @Column({ nullable: true })
-  menuOrder: string;
+  menuOrder?: number;
+
+@Column({ type: 'varchar', length: 10, nullable: true })
+  postdatead: string;
+
+@Column({ type: 'varchar', length: 10, nullable: true })
+  postdatebs: string;
+
+@UpdateDateColumn()
+updatedAt: Date;
 
   @Column({ nullable: true })
   remarks: string;

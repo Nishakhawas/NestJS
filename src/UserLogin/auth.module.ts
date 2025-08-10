@@ -2,23 +2,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthService } from './auth.service';
-import { User } from '../Entity/user.entity'; // adjust path as needed
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { Role } from 'src/Entity/role.entity';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { Group } from 'src/Entity/group.entity';
+import { CreateUser } from 'src/Entity/createuser.entity';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User,Role]),  // <-- THIS LINE IS CRUCIAL
+    TypeOrmModule.forFeature([CreateUser,Group]),  // <-- THIS LINE IS CRUCIAL
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'supersecret', // make sure to use .env
-      signOptions: { expiresIn: '1h' },
+      // signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AuthController], // Add your controllers here if needed
-  providers: [AuthService, JwtStrategy, JwtAuthGuard],
+  providers: [AuthService,JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

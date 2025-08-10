@@ -3,26 +3,27 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/user-login.dto';
 import { Repository } from 'typeorm';
-import { User } from 'src/Entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Role } from 'src/Entity/role.entity';
+import { Group } from 'src/Entity/group.entity';
+import { CreateUser } from 'src/Entity/createuser.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-     @InjectRepository(User)
-    private userRepo: Repository<User>,
-       @InjectRepository(Role)
-    private groupRepo: Repository<Role>,
+     @InjectRepository(CreateUser)
+    private userRepo: Repository<CreateUser>,
+
+    @InjectRepository(Group)
+    private groupRepo: Repository<Group>,
     private jwtService: JwtService,
   ) {}
 
   async login(loginDto: LoginUserDto) {
-  const { email, password } = loginDto;
+  const { userEmail, password } = loginDto;
 
   const user = await this.userRepo.findOne({
-    where: { email:email },
-    relations: ['role','role.permissions'], // Ensure to load the role and its permissions
+    where: { userEmail },
+    relations: ['group','group.permissions'], 
   });
 
   if (!user) throw new UnauthorizedException('Email  found');
@@ -31,28 +32,30 @@ export class AuthService {
 
   
   const payload = {
-    subject: user.id,
-    email: user.email,
-    role: user.role.name,
-    permissions: user.role.users.map((p) => p.name), 
+    sub: user.id,
+    email: user.userEmail,
+    role: user.group.groupName,
+    permissions: user.group.permissions.map((p) => p.name),
   };
+  console.log("🚀 ~ AuthService ~ login ~ payload:", payload)
 
   const token = this.jwtService.sign(payload);
+  console.log("🚀 ~ AuthService ~ login ~ token:", token)
 
   return {
     message: 'Login successful',
     token: token,
     user: {
       id: user.id,
-      email: user.email,
-      role: user.role.name,
-      permissions: user.role.users.map((p) => p.name),
+      email: user.userEmail,
+      role: user.group.groupName,
+      permissions: user.group.permissions.map((p) => p.name),
     },
   };
 }
 
   // Method to find all users
-findAll(): Promise<User[]> {
+findAll(): Promise<CreateUser[]> {
         return this.userRepo.find();
     }
 

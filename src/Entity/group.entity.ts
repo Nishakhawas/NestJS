@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { CreateUser } from './createuser.entity';
 import { Permission } from './permission.entity';
-import { GroupPermission } from './grouppermission.entity';
 
 @Entity()
 export class Group {

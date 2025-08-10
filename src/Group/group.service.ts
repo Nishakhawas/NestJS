@@ -21,14 +21,11 @@ export class groupService {
     return this.groupRepo.find();
   }
 
-
-  
   async findOne(id: number): Promise<Group> {
     const module = await this.groupRepo.findOne({ where: { id } });
     if (!module) throw new NotFoundException('Module not found');
     return module;
   }
-
 
 
 async update(id: number, updateModuleDto: CreateGroupDto): Promise<Group> {

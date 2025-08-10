@@ -1,3 +1,4 @@
+import { CustomRequest } from './../common/types/custom-request.interface';
 import {
   Controller,
   Get,
@@ -10,19 +11,27 @@ import {
   HttpCode,
   HttpStatus,
   Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
-import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/team.dto';
+import { TeamService } from './team.service';
 import { Team } from './team.entity';
+import { JwtAuthGuard } from 'src/UserLogin/jwt-auth.guard';
 
 
-@Controller('banners')
-export class BannerController {
+
+
+@Controller('team')
+export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Post()
-  async create(@Body() dto: CreateTeamDto): Promise<Team> {
-    return await this.teamService.createTeam(dto);
+  @UseGuards(JwtAuthGuard)
+  async create(@Body() dto: CreateTeamDto,@Req() req: CustomRequest): Promise<Team> {
+  const userId = req.user.id;    // This is the decoded user ID from JWT
+  console.log('User ID:', userId);
+    return await this.teamService.createTeam(dto,req);
   }
 
   @Get()
@@ -30,28 +39,15 @@ export class BannerController {
     return await this.teamService.getAllTeam();
   }
 
-//   @Get('search')
-// async find(@Query('search') search: string) {
-//   return this.teamService.find(search);
-// }
+  @Get('search')
+async find(@Query('search') search: string) {
+  return this.teamService.find(search);
+}
 
-  // @Get('columnquery')
-  // finds(@Query('bannerHeading') bannerHeading: string, @Query('startDate') startDate:Date ,@Query('endDate') endDate: Date ) {
-  //   return this.teamService.finds({ bannerHeading, startDate ,endDate});
-  // }
-
-//   @Get('columnquery')
-// finds(
-//   @Query('bannerHeading') bannerHeading: string,
-//   @Query('startDate') startDate: string,
-//   @Query('endDate') endDate: string,
-// ) {
-//   return this.teamService.finds({
-//     bannerHeading,
-//     startDate: startDate ? new Date(startDate) : undefined,
-//     endDate: endDate ? new Date(endDate) : undefined,
-//   });
-// }
+  @Get('columnquery')
+  finds(@Query('name') name: string, @Query('designation') designation: string ,@Query('phone') phone: string,@Query('email') email: string ) {
+    return this.teamService.finds({ name, designation ,phone,email});
+  }
 
   
   @Get(':id')
@@ -62,9 +58,9 @@ export class BannerController {
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: CreateTeamDto,
+    @Body() dto: CreateTeamDto,@Req() req: CustomRequest
   ): Promise<Team> {
-    return await this.teamService.updateTeam(id, dto);
+    return await this.teamService.updateTeam(id, dto, req);
   }
 
   @Delete(':id')
