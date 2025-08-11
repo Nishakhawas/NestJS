@@ -9,5 +9,6 @@ export interface CustomRequest extends Request {
     locationid: number;
     postby: string;
   };
-   ip: string;   
+   ip: string;  
+   mac: string;  
 }

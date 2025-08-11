@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity()
+@Entity('login_activity')
 export class LoginActivity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,23 +12,23 @@ export class LoginActivity {
   loginuseremail: string;
 
   @Column()
-  logindatead: string; 
+  logindatead?: string; 
 
   @Column()
-  logindatebs: string; // BS date YYYY/MM/DD
+  logindatebs?: string; // BS date YYYY/MM/DD
 
   @Column()
   logintime: string; // HH:mm:ss
 
-  @Column()
+  @Column({nullable: true})
   loginip: string;
 
-  @Column()
+  @Column({nullable: true})
   loginmac: string;
 
-  @Column()
-  isvalidlogin: string; // 'Y' or 'N'
+  @Column({nullable: true})
+  isvalidlogin: boolean; // true or false
 
-  @Column()
-  locationid: number;
+  @Column({nullable: true})
+  locationid: string;
 }

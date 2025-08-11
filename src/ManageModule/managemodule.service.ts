@@ -23,43 +23,6 @@ export class ManageModuleService {
       
   ) {}
 
-
-  
-//   async create(createDto: CreateManageModuleDto, req: CustomRequest): Promise<ManageModule> {
-
-//     // const module = this.moduleRepo.create(createDto);
-
-//       const today = new Date("");
-//   const todayAD = today.toISOString();
-  
-//   // const postDateBS = await this.dateService.getBsDateFromAdDate(todayAD); // BS date from helper
-
-//   const bsDateStr = await this.dateService.getBsDateFromAdDate(todayAD);
-// const bsDate = bsDateStr ? new Date(bsDateStr) : undefined;
-
-//   const module = this.moduleRepo.create({
-//     ...createDto,
-//     postdatead:today,
-//     postdatebs: bsDate,
-//   });
-
-//      const savedModule = await this.moduleRepo.save(module);
-//      //  Log the create
-//       await saveAuditLog(this.auditRepo, {
-//       tablename: 'manage_module',
-//       primarykey: 'token',
-//       primaryid: savedModule.id,
-//       action: 'Insert',
-//       dataold:JSON.stringify(module), // No old data for insert
-//       datanew: JSON.stringify(savedModule),
-//       postby: req.module.email,
-//       postip: req.ip,
-//       postmac: req.headers['x-mac-address'] as string,
-//       locationid: req.user.locationid,
-//     }, this.dateRepo);
-//          return savedModule;
-//     }
-
 async create(createDto: CreateManageModuleDto, req: CustomRequest): Promise<ManageModule> {
   const today = new Date();
   const formattedToday = formatDateToYMD(today); // → '2025/08/08'
@@ -86,7 +49,6 @@ async create(createDto: CreateManageModuleDto, req: CustomRequest): Promise<Mana
     postmac: req.headers['x-mac-address'] as string,
     locationid: req.user.locationid,
   }, this.dateRepo);
-
   return savedModule;
 }
 
@@ -236,27 +198,75 @@ async finds(filters: { parentMenu?: string; menu?: string ,displaytext1?:string,
 // }
 
 
+// async getGroupedMenu(): Promise<any[]> {
+//   const allParentMenus = await this.moduleRepo
+//     .createQueryBuilder('module')
+//     .select('DISTINCT module.parentMenu', 'parentMenu')
+//     .addSelect('module.menuIcon', 'menuIcon')
+//     .getRawMany();
+
+//   const activeModules = await this.moduleRepo.find({
+//     where: { isActive: true },
+//     order: { menuOrder: 'ASC' },
+//   });
+
+//   const groupedMap = new Map<string, any>();
+
+//   for (const row of allParentMenus) {
+//     groupedMap.set(row.parentMenu, {
+//       name: row.parentMenu,
+//       iconClass: row.menuIcon,
+//       submenu: [],
+//     });
+//   }
+
+//   for (const mod of activeModules) {
+//     const parent = mod.parentMenu
+//     if (groupedMap.has(parent)) {
+//       groupedMap.get(parent).submenu.push({
+//         title: mod.menu,
+//         route: mod.menuLink,
+//       });
+//     }
+//   }
+
+//   return Array.from(groupedMap.values());
+// }
+
 async getGroupedMenu(): Promise<any[]> {
-  const allParentMenus = await this.moduleRepo
+
+  // 1. Get distinct parentMenus
+  const distinctParentMenus = await this.moduleRepo
     .createQueryBuilder('module')
     .select('DISTINCT module.parentMenu', 'parentMenu')
     .getRawMany();
 
+  // 2. For each parentMenu, get the icon from the first active module
   const activeModules = await this.moduleRepo.find({
-    where: { isActive: true },
+    // where: { isActive: true },
     order: { menuOrder: 'ASC' },
   });
 
-  const groupedMap = new Map<string, any>();
+  // Map parentMenu to icon
+  const parentMenuIconMap = new Map<string, string>();
 
-  for (const row of allParentMenus) {
+  for (const mod of activeModules) {
+    if (!parentMenuIconMap.has(mod.parentMenu)) {
+      parentMenuIconMap.set(mod.parentMenu, mod.menuIcon);
+    }
+  }
+
+  // Step 3: Build grouped map with parentMenus + icon + empty submenu
+  const groupedMap = new Map<string, any>();
+  for (const row of distinctParentMenus) {
     groupedMap.set(row.parentMenu, {
       name: row.parentMenu,
-      iconClass: '',
+      iconClass: parentMenuIconMap.get(row.parentMenu) || '',
       submenu: [],
     });
   }
 
+  // Step 4: Push submenus into grouped map
   for (const mod of activeModules) {
     const parent = mod.parentMenu;
     if (groupedMap.has(parent)) {
@@ -267,7 +277,9 @@ async getGroupedMenu(): Promise<any[]> {
     }
   }
 
+  // Convert map values to array
   return Array.from(groupedMap.values());
 }
+
 
 }

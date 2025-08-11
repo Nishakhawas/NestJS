@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './Entity/user.entity'; // adjust the path and entity name
 
 // import * as dotenv from 'dotenv';
 // dotenv.config(); // Load environment variables from .env file
@@ -39,7 +38,7 @@ import { DateModule } from './Helper Function/Date/date.module';
       // this is key             
       synchronize: true,      // auto-create tables (disable in prod!)
     }),
-    TypeOrmModule.forFeature([User]), // add your entity classes here, 
+    TypeOrmModule.forFeature(), // add your entity classes here, 
     AuthModule,UserModule,PermissionModule,CreateRoleModule,manageModule,group,CreateUserModule,
     GroupPermissionModule,EmailConfigModule,bannerModule,PageModule,TeamModule,FrontendTilesModule,DateModule
 

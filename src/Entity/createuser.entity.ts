@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 import { Group } from './group.entity';
 import { Permission } from './permission.entity';
+import { Optional } from '@nestjs/common';
 
 @Entity()
 export class CreateUser {
@@ -33,6 +34,14 @@ export class CreateUser {
 
   @Column()
   department!: string;
+
+  @Column({ nullable: true })
+  @Optional()
+  ip?: string;
+
+  @Column({ nullable: true })
+  @Optional()
+  mac?: string;
 
   @Column({ default: false })
   isActive!: boolean;

@@ -21,22 +21,19 @@ export class ManageModule {
   menuLink: string;
 
   @Column({ nullable: true })
-  menuIconClass: string;
-
-  // @Column({ nullable: true })
-  // menuOrder: string;
+  menuIcon: string;
 
   @Column({ nullable: true })
   menuOrder?: number;
 
-@Column({ type: 'varchar', length: 10, nullable: true })
+  @Column({ type: 'varchar', length: 10, nullable: true })
   postdatead: string;
 
-@Column({ type: 'varchar', length: 10, nullable: true })
+  @Column({ type: 'varchar', length: 10, nullable: true })
   postdatebs: string;
 
-@UpdateDateColumn()
-updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @Column({ nullable: true })
   remarks: string;
