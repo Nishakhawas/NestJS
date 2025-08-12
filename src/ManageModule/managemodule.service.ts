@@ -267,7 +267,7 @@ async getGroupedMenu(): Promise<any[]> {
   }
 
   // Step 4: Push submenus into grouped map
-  for (const mod of activeModules) {
+  for(const mod of activeModules) {
     const parent = mod.parentMenu;
     if (groupedMap.has(parent)) {
       groupedMap.get(parent).submenu.push({
