@@ -11,18 +11,10 @@ export class EmailConfigService {
     private readonly emailConfigRepo: Repository<EmailConfig>,
   ) {}
 
-  // Get the active email configuration
-  async getConfig(): Promise<EmailConfig> {
-    const config = await this.emailConfigRepo.findOne({
-      where: { isActive: true },
-    });
-
-    if (!config) {
-      throw new NotFoundException('Active email configuration not found');
-    }
-
-    return config;
-  }
+    getConfig(): Promise<EmailConfig[]> {
+          return this.emailConfigRepo.find();
+      }
+  
 
   // Update existing config by ID
   async updateConfig(id: number, dto: EmailConfigDto): Promise<EmailConfig> {

@@ -18,8 +18,17 @@ export class EmailConfigController {
 
   // GET /email-config
   @Get()
-  async getActiveConfig(): Promise<EmailConfig> {
+  async getActiveConfig(): Promise<EmailConfig[]> {
     return await this.emailConfigService.getConfig();
+  }
+
+
+  // POST /email-config
+  @Post()
+  async createConfig(
+    @Body() dto: EmailConfigDto,
+  ): Promise<EmailConfig> {
+    return await this.emailConfigService.createConfig(dto);
   }
 
   // PUT /email-config/:id
@@ -32,12 +41,6 @@ export class EmailConfigController {
     return await this.emailConfigService.updateConfig(+id, dto);
   }
 
-  // POST /email-config
-  @Post()
-  async createConfig(
-    @Body() dto: EmailConfigDto,
-  ): Promise<EmailConfig> {
-    return await this.emailConfigService.createConfig(dto);
-  }
+  
 
 }
