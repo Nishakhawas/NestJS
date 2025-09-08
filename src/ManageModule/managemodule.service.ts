@@ -239,11 +239,11 @@ async getGroupedMenu(): Promise<any[]> {
   const distinctParentMenus = await this.moduleRepo
     .createQueryBuilder('module')
     .select('DISTINCT module.parentMenu', 'parentMenu')
+    .orderBy('COALESCE(module.menuOrder, 9999)', 'ASC')
     .getRawMany();
 
   // 2. For each parentMenu, get the icon from the first active module
   const activeModules = await this.moduleRepo.find({
-    // where: { isActive: true },
     order: { menuOrder: 'ASC' },
   });
 
@@ -273,13 +273,22 @@ async getGroupedMenu(): Promise<any[]> {
       groupedMap.get(parent).submenu.push({
         title: mod.menu,
         route: mod.menuLink,
+        order: mod.menuOrder ?? 9999, // Default to 9999 if null
       });
     }
   }
 
+  // Step 5: Sort each submenu by order
+// for (const [parent, group] of groupedMap) {
+//   group.submenu.sort((a, b) => a.order - b.order);
+// }
+
   // Convert map values to array
   return Array.from(groupedMap.values());
 }
+
+
+
 
 
 }

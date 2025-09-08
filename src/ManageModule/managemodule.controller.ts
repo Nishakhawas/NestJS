@@ -41,9 +41,6 @@ async find(@Query('search') search: string) {
   return this.moduleService.find(search);
 }
 
-
-
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.moduleService.findOne(+id);

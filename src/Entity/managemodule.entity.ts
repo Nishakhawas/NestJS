@@ -23,8 +23,8 @@ export class ManageModule {
   @Column({ nullable: true })
   menuIcon: string;
 
-  @Column({ nullable: true })
-  menuOrder?: number;
+@Column({ default: 9999 })
+menuOrder: number;
 
   @Column({ type: 'varchar', length: 10, nullable: true })
   postdatead: string;
