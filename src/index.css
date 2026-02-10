@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+.filter-text {
+  border: 2px solid skyblue;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  display: flex;
+}
+
+.filter-text:focus {
+  border-color:rgb(98, 202, 243);
+}
